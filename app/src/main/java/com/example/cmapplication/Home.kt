@@ -10,36 +10,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.cmapplication.R
 import com.example.cmapplication.adapter.MobileDetailsAdapter
-import com.example.cmapplication.databinding.ActivityHomeBinding
-import com.example.cmapplication.databinding.ActivityMainBinding
 import com.example.cmapplication.model.MobileDetails
-
 import org.json.JSONArray
 import org.json.JSONObject
 
 class Home : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var context: Context
-
     private lateinit var requestQueue: RequestQueue
     private val mobileDetailsList = mutableListOf<MobileDetails>()
-
     private lateinit var stringRequest: StringRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         init()
         requestJsonData()
 
     }
-
     private fun init() {
         recyclerView = findViewById(R.id.mobile_rv)
         context = this@Home
@@ -87,17 +78,13 @@ class Home : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener(object : MobileDetailsAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-//                Toast.makeText(this@Home, "You Clicked on item no. $position" ,Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@Home,Detail::class.java)
                 intent.putExtra("id",mobileDetailsList[position].id)
                 intent.putExtra("thumbnail",mobileDetailsList[position].pic)
-
                 startActivity(intent)
             }
-
         })
     }
-
     private fun showToast(msg: String) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }

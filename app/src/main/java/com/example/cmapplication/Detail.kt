@@ -21,8 +21,6 @@ class Detail : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         fetchCurrencyData().start()
-
-
     }
     @SuppressLint("SuspiciousIndentation")
     private fun fetchCurrencyData(): Thread
@@ -32,7 +30,6 @@ class Detail : AppCompatActivity() {
         val bundle : Bundle?= intent.extras
         val imagePic = bundle!!.getString("thumbnail")
         Picasso.get().load(imagePic).into(imagesDetails)
-
         val id = bundle!!.getString("id")
 
                 return Thread{
