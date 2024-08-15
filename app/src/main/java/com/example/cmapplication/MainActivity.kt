@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent)
                 Toast.makeText(this, "Login Successful" , Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Failed" , Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Email or password incorrect" , Toast.LENGTH_SHORT).show()
             }
         })
 

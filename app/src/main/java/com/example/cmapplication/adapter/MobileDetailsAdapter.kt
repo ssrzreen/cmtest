@@ -2,6 +2,7 @@ package com.example.cmapplication.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,14 +33,16 @@ class MobileDetailsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MobileDetailHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.mobile_ui, parent, false)
-        return MobileDetailHolder(view)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.activity_mobile_ui, parent, false)
+        return MobileDetailHolder(itemView , mListener)
     }
 
     override fun onBindViewHolder(holder: MobileDetailHolder, position: Int) {
+
         holder.mobileTitle.text = mobileDetailsList[position].title
         holder.mobilePrice.text = mobileDetailsList[position].price
         holder.mobileStock.text = mobileDetailsList[position].stock
+//        holder.mobileId.text = mobileDetailsList[position].id
         Picasso.get().load(mobileDetailsList[position].pic).into(holder.mobilePic)
 
 //        holder.mobileBtnView.setOnClickListener(new View.OnclickListener() {
@@ -54,12 +57,19 @@ class MobileDetailsAdapter(
         return mobileDetailsList.size
     }
 
-    inner class MobileDetailHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MobileDetailHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val mobileTitle: TextView = itemView.findViewById(R.id.title)
         val mobilePic: ImageView = itemView.findViewById(R.id.image)
         val mobilePrice: TextView = itemView.findViewById(R.id.price)
         val mobileStock: TextView = itemView.findViewById(R.id.stock)
-        val mobileBtnView : Button = itemView.findViewById(R.id.viewbtn)
+//        val mobileId : TextView = itemView.findViewById(R.id.id)
+//        val mobileBtnView : Button = itemView.findViewById(R.id.viewbtn)
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
 
        
     }

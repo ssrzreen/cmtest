@@ -1,6 +1,7 @@
 package com.example.cmapplication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -84,6 +85,17 @@ class Home : AppCompatActivity() {
         val adapter = MobileDetailsAdapter(mobileDetailsList, context)
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
+        adapter.setOnItemClickListener(object : MobileDetailsAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+//                Toast.makeText(this@Home, "You Clicked on item no. $position" ,Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@Home,Detail::class.java)
+                intent.putExtra("id",mobileDetailsList[position].id)
+                intent.putExtra("thumbnail",mobileDetailsList[position].pic)
+
+                startActivity(intent)
+            }
+
+        })
     }
 
     private fun showToast(msg: String) {
